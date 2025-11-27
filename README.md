@@ -1,0 +1,1 @@
+# kaptinlin-jsonschema-test
