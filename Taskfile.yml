@@ -1,0 +1,27 @@
+version: 3
+
+tasks:
+  preBuild:
+    desc: Pre-build
+    cmds:
+      - go generate
+      - go mod tidy
+
+  test:
+    desc: Test
+    deps: [ preBuild ]
+    cmds:
+      - go test ./...
+
+  dependencyUpdates:
+    desc: Show dependency updates
+    aliases: [ outdated ]
+    deps: [ preBuild ]
+    cmds:
+      - go list -u -m -json all | go-mod-outdated -update -direct
+
+  mingo:
+    deps: [ preBuild ]
+    cmds:
+      - mise exec go@1.25.4 -- mise install 'go:github.com/bobg/mingo/cmd/mingo@0.14.0'
+      - mise exec 'go:github.com/bobg/mingo/cmd/mingo@0.14.0' -- mingo -tests -v

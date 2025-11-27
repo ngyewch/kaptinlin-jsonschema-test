@@ -1,0 +1,4 @@
+[tools]
+go = '1.25.4'
+task = '3.45.5'
+'ubi:psampaz/go-mod-outdated' = '0.9.0'
